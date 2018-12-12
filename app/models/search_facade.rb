@@ -8,8 +8,12 @@ class SearchFacade
   end
 
   def stations
-    get_stations
+    make_stations
     # .sort_by()  # DISTANCE from WHERE??, what metric is "distance"
+  end
+
+  def make_stations
+    get_stations.map{ |station| Station.new(station) }
   end
 
 

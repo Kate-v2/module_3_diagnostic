@@ -2,7 +2,8 @@
 class WelcomeController < ApplicationController
 
   def index
-    @search = SearchFacade.new()
+    zip = params[:q]
+    @search = SearchFacade.new(zip)
   end
 
 end
