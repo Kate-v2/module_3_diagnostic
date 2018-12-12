@@ -19,6 +19,8 @@ class SearchFacade
 
   private
 
+  # This limit is incorrect - we want 10 of certain oil type
+  # and within 6 miles -- still not sure how to get this metric ....
   def get_stations(qty = 10)
     filter = {zip: @zip, limit: qty}
     EnergyService.new(filter)
