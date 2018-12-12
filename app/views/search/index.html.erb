@@ -1,0 +1,22 @@
+
+<% if !@search.stations.empty? %>
+
+  <div class="search-results" >
+
+    <% @search.stations(10).each do |station| %>
+
+      <div class='station'>
+        <h2><%= station.name %></h2>
+        <h3>Address: <%= station.address %></h3>
+        <h3>Fuel-Type: <%= station.fuel %></h3>
+        <h3><%= station.distance %> miles away</h3>
+        <h3><%= station.access %></h3>
+        <!-- What is this format? -->
+      </div>
+
+    <% end %>
+
+  </div>
+<% else %>
+  Sorry no results for that location.
+<% end %>

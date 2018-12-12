@@ -3,6 +3,11 @@ require "rails_helper"
 
 descibe "User can use search bar" do
 
+  before(:each) do
+
+  end
+
+
   it "finds top 10 closest stations" do
     # As a user    <--- logged in ?
 
