@@ -10,6 +10,10 @@ class SearchFacade
   def stations
     make_stations
 
+    # checklist:
+    # [x] sorted by distance / Closest
+    # [x] <= 6 miles
+
     # API results are already returned in min-to-max distance
     # is it okay to trust this ?
   end
@@ -20,7 +24,9 @@ class SearchFacade
 
 
   def make_stations
-    get_station_data.map{ |station| Station.new(station) if within_distance?(station) }
+    get_station_data.map{ |station|
+      Station.new(station) if within_distance?(station)
+    }
   end
 
   def within_distance(filter)
