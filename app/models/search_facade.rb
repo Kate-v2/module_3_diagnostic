@@ -1,5 +1,5 @@
-
-# PORO
+require "energy_service"
+require "station"
 
 class SearchFacade
 
@@ -7,18 +7,10 @@ class SearchFacade
     @zip = zip
   end
 
+
   def stations
     make_stations
-
-    # checklist:
-    # [x] sorted by distance / Closest
-    # [x] <= 6 miles
-
-    # API results are already returned in min-to-max distance
-    # is it okay to trust this ?
   end
-
-
 
   private
 
@@ -29,7 +21,7 @@ class SearchFacade
     }
   end
 
-  def within_distance(filter)
+  def within_distance?(filter)
     filter[:distance].to_i <= 6 # miles
   end
 
@@ -37,7 +29,7 @@ class SearchFacade
   # ACTUALLY - first 10 should be under 6 OR there are not 10 that are under 6 miles
   def get_station_data(qty = 10)
     filter = { zip: @zip, limit: qty}
-    EnergyService.new(filter).get_stations
+    EnergyService.new(filter).get_stations[:fuel_stations]
   end
 
 end

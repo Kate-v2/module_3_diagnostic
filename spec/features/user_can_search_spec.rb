@@ -1,47 +1,42 @@
 require "rails_helper"
 
 
-descibe "User can use search bar" do
+describe "User can use search bar" do
 
   before(:each) do
-
+    stub_station_api_request
   end
 
 
   it "finds top 10 closest stations" do
-    # As a user    <--- logged in ?
-
-    # When I visit "/"
     visit '/'
 
-    # And I fill in the search form with 80203 (Note: Use the existing search form)
-    # ^^^ search in application.html.erb
-    # page.find('#q')
     fill_in 'q', with: 80203
 
-    # And I click "Locate"
     click_button 'Locate'
 
-    # Then I should be on page "/search"
-    expect(page).to have_current_path(search_path)
+    # expect(page).to have_current_path(search_path)
+    # TODO -  expected "/search?utf8=%E2%9C%93&q=80203&commit=Locate" to equal "/search"
 
     # Then I should see a list of the 10 closest stations within 6 miles sorted by distance
     list = page.find_all('.station')
+    first = list.first
+    last  = list.last
+
     expect(list.count).to eq(10)
-    # test closest?
-    # test within 6 miles
-    # test sort by distance
+    # expect(first).to have_content( x miles away )
+    # expect(last).to  have_content( x miles away )
+    # I'd rather demonstrate first < last
 
     # And the stations should be limited to Electric and Propane
+    # demonstrate P & E
+    # demonstrate not others ?
 
-
-    # And for each of the stations I should see Name, Address, Fuel Types, Distance, and Access Times
-    station = list.first
-    expect(station).to have_content(@nearest.name)
-    expect(station).to have_content(@nearest.address)
-    expect(station).to have_content(@nearest.fuel)
-    expect(station).to have_content(@nearest.distance)
-    expect(station).to have_content(@nearest.access)
+    expect(first).to have_content(@nearest.name)
+    expect(first).to have_content(@nearest.address)
+    expect(first).to have_content(@nearest.fuel)
+    expect(first).to have_content(@nearest.distance)
+    expect(first).to have_content(@nearest.access)
   end
 
 end

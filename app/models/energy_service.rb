@@ -1,6 +1,4 @@
 
-# PORO
-
 class EnergyService
 
   # Docs
@@ -15,7 +13,7 @@ class EnergyService
     url = "?#{location}&#{zip}&#{fuel_types}&#{limit}"
     get_json(url)
   end
-  
+
 
   private
 

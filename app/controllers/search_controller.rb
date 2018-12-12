@@ -1,5 +1,6 @@
+require "search_facade"
 
-class WelcomeController < ApplicationController
+class SearchController < ApplicationController
 
   def index
     zip = params[:q]

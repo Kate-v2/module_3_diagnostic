@@ -3,7 +3,7 @@
 
   <div class="search-results" >
 
-    <% @search.stations(10).each do |station| %>
+    <% @search.stations.each do |station| %>
 
       <div class='station'>
         <h2><%= station.name %></h2>
