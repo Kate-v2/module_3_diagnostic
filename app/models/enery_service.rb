@@ -3,9 +3,12 @@
 
 class EnergyService
 
+  # Docs
+  # https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/nearest/
+
   def initialize(filter)
     @filter = filter
-    @base_url = 'https://developer.nrel.gov/api/alt-fuel-stations/v1.json'
+    @base_url = 'https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json'
   end
 
   def get_stations
@@ -15,12 +18,21 @@ class EnergyService
 
   private
 
+  # --- filters ---
+
   def zip
     "zip=#{@filter[:zip]}"
   end
 
   def limit
     "limit=#{@filter[:limit]}"
+  end
+
+  def fuel_types
+    # A single fuel type, or a comma-separated list of multiple fuel types, may be given.
+    propane  = 'LPG'
+    electric = 'ELC'
+    "fuel_type=#{propane},#{electric}"
   end
 
   def get_json(url)
