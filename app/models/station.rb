@@ -21,7 +21,7 @@ class Station
   end
 
   def distance
-    "?????" # unless ????
+    @filter[:distance]
   end
 
   def access

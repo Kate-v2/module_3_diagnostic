@@ -12,14 +12,21 @@ class EnergyService
   end
 
   def get_stations
-    url = "?#{zip}&#{limit}"
+    url = "?#{location}&#{zip}&#{fuel_types}&#{limit}"
     get_json(url)
   end
+  
 
   private
 
   # --- filters ---
 
+  def location
+    "location=#{@filter[:zip]}"
+  end
+
+  # perhaps we don't need this anymore because of
+  # location which is *required* ?
   def zip
     "zip=#{@filter[:zip]}"
   end
@@ -30,16 +37,17 @@ class EnergyService
 
   def fuel_types
     # A single fuel type, or a comma-separated list of multiple fuel types, may be given.
-    propane  = 'LPG'
-    electric = 'ELC'
+    propane  = 'LPG'; electric = 'ELC'
     "fuel_type=#{propane},#{electric}"
   end
+
+
+  # --- API call ---
 
   def get_json(url)
     response = search_connection.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
-
 
   def search_connection
     Faraday.new(url: @base_url) do |f|
