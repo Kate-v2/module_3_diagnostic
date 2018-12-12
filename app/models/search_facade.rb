@@ -16,7 +16,7 @@ class SearchFacade
   private
 
   def get_stations(qty = 10)
-    filter = {zip: @zip, results: qty}
+    filter = {zip: @zip, limit: qty}
     EnergyService.new(filter)
   end
 
